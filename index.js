@@ -99,7 +99,7 @@ d3.json("data.json", function(err, graph) {
 
         }
        
-       
+     // https://medium.com/ninjaconcept/interactive-dynamic-force-directed-graphs-with-d3-da720c6d7811  
 
       
     }
@@ -108,7 +108,9 @@ d3.json("data.json", function(err, graph) {
         e.addEventListener('click', display);
     })
     function displayGraph(gr, i) {
-
+    	svg.selectAll('circle').style("opacity", 0.3);
+    	svg.selectAll('line').style("opacity", 0.3);
+    	svg.selectAll('text').style("opacity", 0.1);
 	  	console.log(gr.nodes[gr.nodes.length -1].id);
 	 	var color = d3.scaleLinear().domain([gr.nodes[0].id, gr.nodes[gr.nodes.length -1].id]).range(colorRanges[i]);
 	    var link = svg.append("g").attr("class", "links").selectAll("line").data(gr.links).enter().append("line").style("stroke", function(d){
@@ -141,11 +143,16 @@ d3.json("data.json", function(err, graph) {
    svg.selectAll('circle').on('click', function(d, i) {
 	       d3.select(this).transition().attr('r', 15);
 
-	       var img = document.createElement("img");
+			var c = document.getElementById("img-container");
+			while (c.firstChild) {
+			    c.removeChild(c.firstChild);
+			}
+
+	       	var img = document.createElement("img");
 	    	img.setAttribute("src", d.image);
 	    	img.setAttribute("class", "img");
 	    	console.log(d.image)
-	    	document.getElementById("img-container").appendChild(img)
+	    	c.appendChild(img)
 
 
 	    }).on('mouseover', function(d, i) {

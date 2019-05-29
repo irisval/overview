@@ -9,7 +9,7 @@
         {"id": 6, "name": "NY Tyrant", "group": 1},
         {"id": 7, "name": "Bellevue Literary Press", "group": 1},
         {"id": 8, "name": "Lithub", "group": 1},
-        {"id": 9, "name": "Electric Lit", "group": 1},
+        {"id": 9, "name": "Electric Lit", "group": 1, "image": "https://iguhb7lay20b9vtl-zippykid.netdna-ssl.com/wp-content/uploads/2018/04/1*LH4nhHrGJECSYEA_qYHigA.jpeg"},
         {"id": 10, "name": "Curbside Splendor", "group": 1},
         {"id": 11, "name": "Archipelago Books", "group": 1},
         {"id": 12, "name": "Bookjob", "group": 1},

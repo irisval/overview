@@ -65,13 +65,17 @@ input[type="text"] {
 .container {
     display: inline-block;
 }
+/*linear-gradient(to right,#1e5799 20%,#6d237c 40%,#bf0489 62%,#bb2145 80%,#f6bd16 100%)*/
 #img-container {
-    border: 2px solid black;
-    width: 95%;
+    width: 96%;
     margin: 0 auto;
+    /*background: -webkit-linear-gradient(left, #1e5799 20%,#6d237c 40%,#bf0489 62%,#bb2145 80%,#f6bd16 100%);
+*/
+
 }
 .img {
     width: 100%;
+    border: 2px solid black;
 }
 .d {
     text-align: center;
