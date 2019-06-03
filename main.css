@@ -25,6 +25,9 @@ body, html {
 	font-size: 0.85rem;
 }*/
 
+.circle {
+    z-index: 1;
+}
 .t {
 	font-size: .85rem;
     font-weight: 300;
