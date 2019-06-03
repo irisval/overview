@@ -5,21 +5,21 @@ document.addEventListener("DOMContentLoaded", function() {
 	svg.attr("width", width).attr("height", height);
 	// svg.attr("align", "center");
 	var groupings = {
-		"0": [0, 1],
-		"1": [2, 3, 4],
-		"2": [5],
-		"3": [6],
-		"4": [7, 8, 9],
-		"5": [10, 11, 12],
+		"0": [0, 1, "d.x - width/4", "d.y - height/4"],
+		"1": [2, 3, 4, "d.x + width/4", "d.y - height/4"],
+		"2": [5, "d.x - width/3", "d.y - height/3"],
+		"3": [6, "d.x - width/3", "d.y - height/3"],
+		"4": [7, 8, 9, "d.x - width/3", "d.y - height/3"],
+		"5": [10, 11, 12, "d.x - width/3", "d.y - height/3"],
 		"6": [13, 14]
 	};
 	var colorRanges = {
-		"0": ['#00ADEF', '#1e5799'],
-		"1": ['#1e5799', '#6d237c'],
-		"2": ['#6d237c', '#bf0489'],
-		"3": ['#bf0489', '#bb2145'],
-		"4": ['#bb2145', '#D25F32'],
-		"5": ['#D25F32', '#f6bd16'],
+		"0": ['#00ADEF', '#1e5799'], //
+		"1": ['#1e5799', '#6d237c'], //
+		"2": ['#6d237c', '#bf0489'], // 
+		"3": ['#bf0489', '#bb2145'], //
+		"4": ['#bb2145', '#D25F32'], //
+		"5": ['#D25F32', '#f6bd16'], //
 		"6": ['#f6bd16', '#FFF200']
 	}
 	var colorGroups = {
@@ -69,10 +69,14 @@ document.addEventListener("DOMContentLoaded", function() {
 		var selects = document.querySelectorAll(".btn");
 		var display = function() {
 			var i = this.id;
-			var next = parseInt(this.id) + 1;
-			if (i != 6) {
-				this.classList.add("hidden");
+			
+			if (i < 6) {
+				var next = parseInt(this.id) + 1;
 				document.getElementById(next).classList.remove("hidden");
+			}
+			// if (i != 7) {
+
+				this.classList.add("hidden");
 				var groups = groupings[i];
 				var filteredNodes = graph.nodes.filter(function(e) {
 					// return e.group == 2 || e.group == 3 || e.group == 4;
@@ -94,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				// console.log("-------------");
 				// console.log(graph);
 				displayGraph(nObj, i);
-			}
+			// }
 			// https://medium.com/ninjaconcept/interactive-dynamic-force-directed-graphs-with-d3-da720c6d7811  
 		}
 		selects.forEach(function(e) {
@@ -102,12 +106,46 @@ document.addEventListener("DOMContentLoaded", function() {
 		})
 
 		function displayGraph(gr, i) {
+// svg.selectAll('circle').on('click', function(d, i) {
+// 				d3.select(this).transition().attr('r', 15);
+			if (i > 0) {
+				var prev = i - 1;
+				console.log("b");
+				svg.select('.links-' + prev).selectAll('line')
+				console.log("b");
+				svg.select('.node-' + prev).selectAll('g')
+				.attr('transform', function(d) {
+					var l = Math.floor((Math.random() * 950) + 1);
+					var d = Math.floor((Math.random() * 750) + 1);
+					// var newX = 
+					// var newY =
+					// var newX = groupings[prev][groupings[prev].length-2];
+					// var newY = groupings[prev][groupings[prev].length-1];
+				    return 'translate(' + eval(l) + ',' + eval(d) + ')';
+				});
+
+				svg.select('.node-' + prev).selectAll('circle').attr('r', function(d) {
+					if (d.branched == true) {
+						return 7;
+					} else {
+						return 13;
+					}
+				})
+				svg.select('.links-' + prev).selectAll('line').remove();
+				//simulation.nodes(svg.select('.line-' + prev).selectAll('line')).on("tick", ticked);
+			// 	simulation.force('link', d3.forceLink(gr.links).id(function(d) {
+			// 	return d.id;
+			// }));
+			
+			}
+			
+			
+			console.log("this works! " + i);
 			svg.selectAll('circle').style("opacity", 0.3);
-			svg.selectAll('line').style("opacity", 0.3);
-			svg.selectAll('text').style("opacity", 0.1);
+			svg.selectAll('text').style("opacity", 0.2);
 			console.log(gr.nodes[gr.nodes.length - 1].id);
 			var color = d3.scaleLinear().domain([gr.nodes[0].id, gr.nodes[gr.nodes.length - 1].id]).range(colorRanges[i]);
-			var link = svg.append("g").attr("class", "links").selectAll("line").data(gr.links).enter().append("line").style("stroke", function(d) {
+			var link = svg.append("g").attr("class", "links-" + i).selectAll("line").data(gr.links).enter().append("line").style("stroke", function(d) {
 				return colorGroups[graph.nodes[d.source].group];
 			});
 			var node = svg.append("g").attr("class", "nodes").attr("class", "node-" + i).selectAll("g").data(gr.nodes).enter().append("g");
