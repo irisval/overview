@@ -71,7 +71,7 @@ input[type="text"] {
 /*    var height = 760;*/
 }
 /*linear-gradient(to right,#1e5799 20%,#6d237c 40%,#bf0489 62%,#bb2145 80%,#f6bd16 100%)*/
-#img-container {
+#img-container, #hover-container {
     width: 96%;
     margin: 0 auto;
     /*background: -webkit-linear-gradient(left, #1e5799 20%,#6d237c 40%,#bf0489 62%,#bb2145 80%,#f6bd16 100%);

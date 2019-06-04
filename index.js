@@ -177,6 +177,8 @@ document.addEventListener("DOMContentLoaded", function() {
 			}).strength(0.1));
 			svg.selectAll('circle').on('click', function(d, i) {
 				d3.select(this).transition().attr('r', 15);
+			
+				document.getElementById("hover-container").classList.add('hidden');
 				var c = document.getElementById("img-container");
 				while (c.firstChild) {
 					c.removeChild(c.firstChild);
@@ -184,8 +186,8 @@ document.addEventListener("DOMContentLoaded", function() {
 				var img = document.createElement("img");
 				img.setAttribute("src", d.image);
 				img.setAttribute("class", "img");
-				console.log(d.image)
-				c.appendChild(img)
+				console.log(d.image);
+				c.appendChild(img);
 			})
 			.on("mouseover", mouseover)
 			.on("mouseleave", mouseleave);
@@ -193,6 +195,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 			svg.selectAll('circle').data(gr).enter().on('mouseover', function(d, i) {
 				d3.select(this).append('p').text(d.name).attr('x', x(d.x)).attr('y', y(d.y));
+
 			});
 
 			// 	simulation.force("link", d3.forceLink(gr.links)).links(gr.links);
@@ -217,9 +220,29 @@ document.addEventListener("DOMContentLoaded", function() {
 	});
 
  var mouseover = function(d) {
+
  	console.log(d.branched);
  	if (d.branched == true) {
 		d3.select(this.parentNode).selectAll('text').text(d.name).style("z-index", "10");
+	}
+	if (d.image != "") {
+			var f = document.getElementById("hover-container");
+ 	f.classList.remove('hidden');
+	var c = document.getElementById("img-container");
+	c.classList.add('hidden');
+	
+ 	console.log(document.getElementById('img-container'));
+ 	console.log(document.getElementById('hover-container'));
+
+
+
+			d3.select(this).transition().attr('r', 15);
+			
+			var img = document.createElement("img");
+			img.setAttribute("src", d.image);
+			img.setAttribute("class", "img");
+			console.log(d.image);
+			f.appendChild(img);
 	}
   }
   var mousemove = function(d) {
@@ -227,6 +250,15 @@ document.addEventListener("DOMContentLoaded", function() {
   var mouseleave = function(d) {
   		if (d.branched == true) {
   	 		d3.select(this.parentNode).selectAll('text').text('');
+  	 }
+  	 if (d.image != "") { 
+  	 	document.getElementById('img-container').classList.remove('hidden');
+  	 	var f = document.getElementById("hover-container");
+		// f.classList.add('hidden');
+		while (f.firstChild) {
+			f.removeChild(f.firstChild);
+		}
+		
   	 }
   }
 
