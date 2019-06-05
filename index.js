@@ -177,8 +177,8 @@ document.addEventListener("DOMContentLoaded", function() {
 			}).strength(0.1));
 			svg.selectAll('circle').on('click', function(d, i) {
 				d3.select(this).transition().attr('r', 15);
-			
-				document.getElementById("hover-container").classList.add('hidden');
+				
+				// document.getElementById("hover-container").classList.add('hidden');
 				var c = document.getElementById("img-container");
 				while (c.firstChild) {
 					c.removeChild(c.firstChild);
@@ -200,7 +200,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
 			// 	simulation.force("link", d3.forceLink(gr.links)).links(gr.links);
 			function ticked() {
-				link.attr("x1", function(d) {
+				var ticksPerRender = 3;
+
+
+
+
+    link.attr("x1", function(d) {
 					return d.source.x;
 				});
 				link.attr("y1", function(d) {
@@ -215,34 +220,33 @@ document.addEventListener("DOMContentLoaded", function() {
 				node.attr("transform", function(d) {
 					return "translate(" + d.x + "," + d.y + ")";
 				})
+
+
+				
 			}
 		}
 	});
 
  var mouseover = function(d) {
-
+ 	document.getElementById('t').innerText = d.name;
+ 	document.getElementById('t').style.color = colorRanges[document.querySelector('a').id][0]
  	console.log(d.branched);
  	if (d.branched == true) {
 		d3.select(this.parentNode).selectAll('text').text(d.name).style("z-index", "10");
 	}
-	if (d.image != "") {
-			var f = document.getElementById("hover-container");
- 	f.classList.remove('hidden');
-	var c = document.getElementById("img-container");
-	c.classList.add('hidden');
-	
- 	console.log(document.getElementById('img-container'));
- 	console.log(document.getElementById('hover-container'));
-
-
-
+			if (d.image != "") {
+			var c = document.getElementById("img-container");
+			while (c.firstChild) {
+				c.removeChild(c.firstChild);
+			}
+		
 			d3.select(this).transition().attr('r', 15);
 			
 			var img = document.createElement("img");
 			img.setAttribute("src", d.image);
 			img.setAttribute("class", "img");
 			console.log(d.image);
-			f.appendChild(img);
+			c.appendChild(img);
 	}
   }
   var mousemove = function(d) {
@@ -251,15 +255,10 @@ document.addEventListener("DOMContentLoaded", function() {
   		if (d.branched == true) {
   	 		d3.select(this.parentNode).selectAll('text').text('');
   	 }
-  	 if (d.image != "") { 
-  	 	document.getElementById('img-container').classList.remove('hidden');
-  	 	var f = document.getElementById("hover-container");
-		// f.classList.add('hidden');
-		while (f.firstChild) {
-			f.removeChild(f.firstChild);
-		}
-		
-  	 }
+  	 // if (d.image != "") {
+  	 // 	document.getElementById('img-container').classList.remove('hidden');
+  	 
+  	 // }
   }
 
 	function dragstarted(d) {

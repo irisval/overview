@@ -45,7 +45,7 @@
 
 
     {"id": 38, "branched": false, "name": "river edge", "image": "https://res.cloudinary.com/dupk3ebhq/image/upload/v1559658826/img/g3/200px-Bergen_County_New_Jersey_Incorporated_and_Unincorporated_areas_River_Edge_Highlighted.svg_lsqwk1.png", "group": 5},
-    {"id": 39, "branched": false, "name": "bus", "image": "https://res.cloudinary.com/dupk3ebhq/image/upload/v1559658826/img/g3/IMG_3165_dzabzp.jpg", "group": 5},
+    {"id": 39, "branched": false, "name": "bus", "image": "img/t.jpeg", "group": 5},
     {"id": 40, "branched": false, "name": "port authority", "image": "https://res.cloudinary.com/dupk3ebhq/image/upload/v1559658825/img/g3/BN-HK916_NYBUS0_P_20150316172057_z77iev.jpg", "group": 5},
     {"id": 41, "branched": false, "name": "subway", "image": "https://res.cloudinary.com/dupk3ebhq/image/upload/v1559658826/img/g3/IMG_3846_dppacw.jpg", "group": 5},
     {"id": 42, "branched": false, "name": "walk", "image": "https://res.cloudinary.com/dupk3ebhq/image/upload/v1559673358/img/g3/IMG_3247_fxe4mk.jpg", "group": 5},
@@ -113,7 +113,7 @@
   "links": [
     {"source": 0, "target": 1, "distance": 50},
     {"source": 1, "target": 2, "distance": 50},
-    {"source": 2, "target": 3, "distance": 40},
+    {"source": 2, "target": 3, "distance": 60},
         {"source": 4, "target": 3, "distance": 40},
         {"source": 5, "target": 3, "distance": 40},
         {"source": 6, "target": 3, "distance": 40},
