@@ -22,12 +22,13 @@ document.addEventListener("DOMContentLoaded", function() {
 		"5": ['#D25F32', '#f6bd16'], //
 		"6": ['#f6bd16', '#FFF200']
 	}
+
 	var colorGroups = {
 		"0": "#00ADEF",
 		"1": "#0F8EBF",
 		"2": "#1e5799",
 		"3": "#354790",
-		"4": "354790",
+		"4": "#354790",
 		"5": "#6d237c",
 		"6": "#bf0489",
 		"7": "#bb2145",
@@ -73,6 +74,13 @@ document.addEventListener("DOMContentLoaded", function() {
 			if (i < 6) {
 				var next = parseInt(this.id) + 1;
 				document.getElementById(next).classList.remove("hidden");
+				var co = colorRanges[next][0];
+ 				document.getElementById(next).style.border = "3px solid " + co;
+ 				document.getElementById(next).style.color = co;
+ 				document.getElementById(next).childNodes[0].style.color = co;
+ 	
+
+
 			}
 			// if (i != 7) {
 
@@ -142,11 +150,13 @@ document.addEventListener("DOMContentLoaded", function() {
 			
 			console.log("this works! " + i);
 			svg.selectAll('circle').style("opacity", 0.3);
+
 			svg.selectAll('text').style("opacity", 0.2);
 			console.log(gr.nodes[gr.nodes.length - 1].id);
 			var color = d3.scaleLinear().domain([gr.nodes[0].id, gr.nodes[gr.nodes.length - 1].id]).range(colorRanges[i]);
 			var link = svg.append("g").attr("class", "links-" + i).selectAll("line").data(gr.links).enter().append("line").style("stroke", function(d) {
 				return colorGroups[graph.nodes[d.source].group];
+				// return '#808080';
 			});
 			var node = svg.append("g").attr("class", "nodes").attr("class", "node-" + i).selectAll("g").data(gr.nodes).enter().append("g");
 			var circles = node.append("circle").attr("class", "circle").attr("r", 10).attr("fill", function(d) {
@@ -177,7 +187,8 @@ document.addEventListener("DOMContentLoaded", function() {
 			}).strength(0.1));
 			svg.selectAll('circle').on('click', function(d, i) {
 				d3.select(this).transition().attr('r', 15);
-				
+				document.getElementById('tf').innerText = d.name;
+ 				document.getElementById('tf').style.color = colorGroups[d.group];
 				// document.getElementById("hover-container").classList.add('hidden');
 				var c = document.getElementById("img-container");
 				while (c.firstChild) {
@@ -188,6 +199,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				img.setAttribute("class", "img");
 				console.log(d.image);
 				c.appendChild(img);
+				document.querySelector('#img-container .img').style.border = "4px solid " + colorGroups[d.group];
 			})
 			.on("mouseover", mouseover)
 			.on("mouseleave", mouseleave);
@@ -228,8 +240,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	});
 
  var mouseover = function(d) {
- 	document.getElementById('t').innerText = d.name;
- 	document.getElementById('t').style.color = colorRanges[document.querySelector('a').id][0]
+ 	document.getElementById('tf').innerText = d.name;
+ 	document.getElementById('tf').style.color = colorGroups[d.group];
+
  	console.log(d.branched);
  	if (d.branched == true) {
 		d3.select(this.parentNode).selectAll('text').text(d.name).style("z-index", "10");
@@ -243,10 +256,12 @@ document.addEventListener("DOMContentLoaded", function() {
 			d3.select(this).transition().attr('r', 15);
 			
 			var img = document.createElement("img");
+
 			img.setAttribute("src", d.image);
 			img.setAttribute("class", "img");
 			console.log(d.image);
 			c.appendChild(img);
+			document.querySelector('#img-container .img').style.border = "4px solid " + colorGroups[d.group];
 	}
   }
   var mousemove = function(d) {

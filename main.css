@@ -54,10 +54,14 @@ body, html {
 .circle {
     z-index: 1;
 }
-.t {
-	font-size: .85rem;
-    font-weight: 300;
-    letter-spacing: 0.5px;
+#tf {
+	color: rgb(0, 173, 239);
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 6px;
+    padding-top: 2em;
 }
 
 label {
@@ -78,13 +82,14 @@ label {
 }*/
 
 .btn {
-    border: 3px solid;
-    border-image-source: linear-gradient(to right, #ffda78, #ffb209);
-    border-image-slice: 1;
+    border: 3px solid #00ADEF;
+  /*  border-image-source: linear-gradient(to right, #ffda78, #ffb209);
+    border-image-slice: 1;*/
+    color: #00ADEF;
     padding: 5px 24px;
-    background: linear-gradient(to right, #FFDA78, #FFB209);
+/*    background: linear-gradient(to right, #FFDA78, #FFB209);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: transparent;*/
     letter-spacing: 1.5px;
     font-weight: 600;
     text-transform: lowercase;
@@ -93,9 +98,7 @@ label {
 
 i {
     margin-right: 2px;
-    background: #FFDA78;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #00ADEF;
 }
 #container {
     background-color: #111111;
@@ -104,9 +107,9 @@ i {
 /*    var height = 760;*/
 }
 /*linear-gradient(to right,#1e5799 20%,#6d237c 40%,#bf0489 62%,#bb2145 80%,#f6bd16 100%)*/
-#t {
+/*#t {
     padding-top: 4em;
-}
+}*/
 #img-container {
     padding-top: 10px;
     width: 96%;
@@ -117,7 +120,7 @@ i {
 }
 .img {
     width: 100%;
-    border: 4px solid #FFC80A;
+   /* border: 4px solid #FFC80A;*/
 }
 .d {
    /* background-color: #373737;*/
